@@ -1,0 +1,12 @@
+@import "reset.css";
+
+body {
+	background-color: #1b1b1b;
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+}
+canvas {
+	border: 2px solid white;
+	box-shadow: 0px 0px 20px #3be6c6, 0px 0px 20px #3be6c6 inset;
+}
