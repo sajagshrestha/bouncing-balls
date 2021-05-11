@@ -2,14 +2,14 @@ function generateRandomIntegerBetween(minValue, maxValue) {
 	return Math.floor(Math.random() * (maxValue - minValue) + minValue);
 }
 
-function detectedCollisionBetween(ball_one, ball_two) {
+function detectedCollisionBetween(ballOne, ballTwo) {
 	const distance = claculateDistance(
-		ball_one.x,
-		ball_one.y,
-		ball_two.x,
-		ball_two.y
+		ballOne.x,
+		ballOne.y,
+		ballTwo.x,
+		ballTwo.y
 	);
-	if (distance <= ball_one.radius + ball_two.radius) return true;
+	if (distance <= ballOne.radius + ballTwo.radius) return true;
 	return false;
 }
 function claculateDistance(x1, y1, x2, y2) {
