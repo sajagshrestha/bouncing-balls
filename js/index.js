@@ -26,7 +26,7 @@ const colors = [
 let balls = [];
 
 //ball class
-function Ball(x, y, radius, xVelocity, yVelocity, color, mass) {
+function Ball(x, y, radius, xVelocity, yVelocity, color, mass = MASS) {
 	this.x = x;
 	this.y = y;
 	this.radius = radius;
@@ -95,7 +95,7 @@ for (i = 0; i < NUMBER_OF_BALLS; i++) {
 		for (let j = 0; j < balls.length; j++) {
 			if (
 				detectedCollisionBetween(
-					new Ball(x, y, radius, xVelocity, yVelocity, color, MASS),
+					new Ball(x, y, radius, xVelocity, yVelocity, color),
 					balls[j]
 				)
 			) {
@@ -110,7 +110,7 @@ for (i = 0; i < NUMBER_OF_BALLS; i++) {
 		}
 	}
 
-	balls.push(new Ball(x, y, radius, xVelocity, yVelocity, color, MASS));
+	balls.push(new Ball(x, y, radius, xVelocity, yVelocity, color));
 }
 
 function animate() {
