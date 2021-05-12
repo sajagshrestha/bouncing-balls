@@ -36,6 +36,7 @@ function Ball(x, y, radius, xVelocity, yVelocity, color, mass) {
 		y: yVelocity,
 	};
 	this.mass = mass;
+
 	//draw ball to canvas
 	this.drawBall = () => {
 		context.beginPath();
@@ -56,6 +57,7 @@ function Ball(x, y, radius, xVelocity, yVelocity, color, mass) {
 				resolveCollision(this, balls[i]);
 			}
 		}
+
 		//detect collision with container
 		if (this.x - this.radius <= 0 || this.x + this.radius >= canvas.width) {
 			this.velocity.x = -this.velocity.x;
@@ -73,8 +75,7 @@ function Ball(x, y, radius, xVelocity, yVelocity, color, mass) {
 	};
 }
 
-//create ball
-
+//create balls
 for (i = 0; i < NUMBER_OF_BALLS; i++) {
 	let radius = generateRandomIntegerBetween(MIN_BALL_RADIUS, MAX_BALL_RADIUS);
 	let x = generateRandomIntegerBetween(radius, canvas.width - radius);
@@ -88,13 +89,15 @@ for (i = 0; i < NUMBER_OF_BALLS; i++) {
 		MAX_BALL_VELOCITY
 	);
 	let color = colors[generateRandomIntegerBetween(0, colors.length)];
+
 	//prevent balls form generating on top of ech other
 	if (i !== 0) {
 		for (let j = 0; j < balls.length; j++) {
 			if (
-				claculateDistance(x, y, balls[j].x, balls[j].y) -
-					(radius + balls[j].radius) <
-				0
+				detectedCollisionBetween(
+					new Ball(x, y, radius, xVelocity, yVelocity, color, MASS),
+					balls[j]
+				)
 			) {
 				x = generateRandomIntegerBetween(radius, canvas.width - radius);
 				y = generateRandomIntegerBetween(
@@ -112,7 +115,11 @@ for (i = 0; i < NUMBER_OF_BALLS; i++) {
 
 function animate() {
 	requestAnimationFrame(animate);
+
+	//clear canvas after each repaint
 	context.clearRect(0, 0, canvas.width, canvas.height);
+
+	//update balls in each repaint
 	balls.forEach((ball) => {
 		ball.updateBall();
 	});
