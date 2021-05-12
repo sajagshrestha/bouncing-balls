@@ -94,9 +94,10 @@ for (i = 0; i < NUMBER_OF_BALLS; i++) {
 	if (i !== 0) {
 		for (let j = 0; j < balls.length; j++) {
 			if (
-				claculateDistance(x, y, balls[j].x, balls[j].y) -
-					(radius + balls[j].radius) <
-				0
+				detectedCollisionBetween(
+					new Ball(x, y, radius, xVelocity, yVelocity, color, MASS),
+					balls[j]
+				)
 			) {
 				x = generateRandomIntegerBetween(radius, canvas.width - radius);
 				y = generateRandomIntegerBetween(
